@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
 
-import { AngularFire, 
-         AuthProviders, 
-         AuthMethods,
-         FirebaseListObservable } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 
 import { MdDialog, MdDialogRef } from '@angular/material';
-
-import {  EditorComponent } from './editor.component'; 
-
+import { EditorComponent } from './core/editor/editor.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,9 +13,9 @@ export class AppComponent {
   title = 'app works!';
   items: FirebaseListObservable<any>;
   name: any;
-  msgVal: string = '';
-  editVal: string = '';
-  editing: boolean = false;
+  msgVal: string;
+  editVal: string;
+  editing: boolean;
   selectedOption: string;
 
   constructor(public af: AngularFire, public dialog: MdDialog) {
@@ -30,8 +25,8 @@ export class AppComponent {
       }
     });
 
-    this.af.auth.subscribe(auth => { 
-      if(auth) {
+    this.af.auth.subscribe(auth => {
+      if (auth) {
         this.name = auth;
       }
     });
@@ -51,23 +46,24 @@ export class AppComponent {
   }
 
   editItem(key: string, text: string) {
-      
       this.items.update(key, { message: text });
       this.editVal = '';
   }
-  
   deleteItem(key: string) {
-    this.items.remove(key); 
+    this.items.remove(key);
   }
   showInput() {
     this.editing = !this.editing;
   }
 
-  openEditor(key) {
-    let dialogRef = this.dialog.open(EditorComponent);
+  openEditor(key: any, data: any) {
+    const dialogRef = this.dialog.open(EditorComponent, {
+      data: data
+    });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
-      this.editItem(key, result);
+      console.log(this.selectedOption);
+      this.editItem(key, this.selectedOption);
     });
   }
 }
