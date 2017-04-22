@@ -1,3 +1,33 @@
-<h1>
-  {{title}}
-</h1>
+<navbar-cmp></navbar-cmp>
+
+<div class="container">
+  <button (click)="login()" *ngIf="!name">Anonymous Login</button>    
+  <input type="text" id="message" *ngIf="name" placeholder="Wpisz przedmiot" (keyup.enter)="Send($event.target.value)" [(ngModel)]="msgVal" />
+</div>
+
+
+<!--<md-card *ngFor="let item of items | async"> {{item.message}} </md-card>-->
+
+
+
+
+
+<div class="container">
+  <div class="list-group">
+      <div class="list-group-item" *ngFor="let item of items | async">
+        <p>{{item.message}}</p>
+        <div class="ml-auto">
+          <i (click)="openEditor(item.$key)" class="material-icons">edit</i>
+          <i (click)="showInput()" class="material-icons">edit</i>
+          <i (click)="deleteItem(item.$key)" class="material-icons ">delete_forever</i>
+        </div>
+        <!--<div *ngIf="editing">
+        <input type="text" #updatetext [value]="item.message" />
+        </div>-->
+        <div *ngIf="editing">
+        <input type="text" placeholder="{{item.message}}"  #updatetext [value]="item.message" [(ngModel)]="editVal" (keyup.enter)="editItem(item.$key, $event.target.value)"/>
+        </div>
+      </div>
+      
+  </div>
+</div>

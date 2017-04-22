@@ -1,0 +1,38 @@
+
+<!--Navbar-->
+<nav class="navbar navbar-toggleable-md navbar-dark bg-primary">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <strong>Navbar</strong>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav1">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Pricing</a>
+                </li>
+                <li class="nav-item dropdown btn-group">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" md-button [mdMenuTriggerFor]="menu">Dropdown</a>
+                    
+                        <md-menu #menu="mdMenu">
+                        <button md-menu-item>Item 1</button>
+                        <button md-menu-item>Item 2</button>
+                        </md-menu>
+                </li>
+            </ul>
+            <form class="">
+                <md-input-container class="example-full-width">
+                <input mdInput class=""  placeholder="Search">
+                 </md-input-container>
+            </form>
+        </div>
+    </div>
+</nav>
